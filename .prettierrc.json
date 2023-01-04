@@ -2,6 +2,6 @@
     "tabWidth": 2,
     "singleQuote": true,
     "arrowParens": "avoid",
-    "semi": false,
+    "semi": true,
     "useTabs": true
 }
