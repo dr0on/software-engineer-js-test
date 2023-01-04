@@ -16,19 +16,9 @@ export const PhotoEditor = () => {
 		if (image && canvasRef.current) {
 			const canvas = canvasRef.current;
 			const ctx = canvas.getContext('2d');
-			// const width = image.naturalWidth;
-			// const height = image.naturalHeight;
-			// canvas.width = 500;
-			// canvas.height = 500 * height / width;
-
-			// ctx?.drawImage(image, 0, 0, width, height, 0, 0, canvas.width, canvas.height);
-
-      // Finding the new width and height based on the scale factor
-      let newWidth = image.width * options.scale;
-      let newHeight = image.height * options.scale;
 
       ctx?.clearRect(0, 0, canvas.width, canvas.height);
-      ctx?.drawImage(image, options.x, options.y, newWidth, newHeight);
+      ctx?.drawImage(image, options.x, options.y, image.naturalWidth * options.scale, image.naturalHeight * options.scale);
 		}
 	}, [image, options.x, options.y, options.scale]);
 
@@ -54,12 +44,12 @@ export const PhotoEditor = () => {
                 const editorCanvas = canvasRef.current;
                 let scaleFactor = Math.max(editorCanvas?.width / img.width, editorCanvas?.height / img.height);
                 
-                // Finding the new width and height based on the scale factor
+                // // Finding the new width and height based on the scale factor
                 let newWidth = img.width * scaleFactor;
                 let newHeight = img.height * scaleFactor;
                 
-                // get the top left position of the image
-                // in order to center the image within the canvas
+                // // get the top left position of the image
+                // // in order to center the image within the canvas
                 let x = (editorCanvas.width / 2) - (newWidth / 2);
                 let y = (editorCanvas.height / 2) - (newHeight / 2);
 
@@ -76,22 +66,21 @@ export const PhotoEditor = () => {
 	};
 
   const handleIncreaseZoomClick = () => {
-    const {x, y, scale} = calculateZoomOptions(1.1);
+    const {x, y, scale} = calculateZoomOptions(image, 1.1);
 
     setOptions({x, y, scale});
   }
 
   const handleDecreaseZoomClick = () => {
-    const {x, y, scale} = calculateZoomOptions(0.9);
+    const {x, y, scale} = calculateZoomOptions(image, 0.9);
 
     setOptions({x, y, scale});
   }
 
-  const calculateZoomOptions = (scale: number) => {
-    const currentWidth = image?.width || 0 * options.scale;
-    const currentHeight = image?.height || 0 * options.scale;
+  const calculateZoomOptions = (img: any, scale: number) => {
+    const currentWidth = img.width * options.scale;
+    const currentHeight = img.height * options.scale;
     
-    // Finding the new width and height based on the scale factor
     const newWidth = currentWidth * scale;
     const newHeight = currentHeight * scale;
     
