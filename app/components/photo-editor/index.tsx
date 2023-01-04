@@ -6,12 +6,6 @@ export const PhotoEditor = () => {
   const [options, setOptions] = useState({x: 0, y: 0, scale: 1});
 	const canvasRef = useRef<HTMLCanvasElement>(null);
 
-  let editorCanvas: {
-    width: number;
-    height: number;
-    getContext(arg0: string): unknown; toDataURL: (arg0: string) => any; 
-  };
-
 	useEffect(() => {
 		if (image && canvasRef.current) {
 			const canvas = canvasRef.current;
@@ -44,12 +38,12 @@ export const PhotoEditor = () => {
                 const editorCanvas = canvasRef.current;
                 let scaleFactor = Math.max(editorCanvas?.width / img.width, editorCanvas?.height / img.height);
                 
-                // // Finding the new width and height based on the scale factor
+                // Finding the new width and height based on the scale factor
                 let newWidth = img.width * scaleFactor;
                 let newHeight = img.height * scaleFactor;
                 
-                // // get the top left position of the image
-                // // in order to center the image within the canvas
+                // get the top left position of the image
+                // in order to center the image within the canvas
                 let x = (editorCanvas.width / 2) - (newWidth / 2);
                 let y = (editorCanvas.height / 2) - (newHeight / 2);
 
@@ -107,9 +101,43 @@ export const PhotoEditor = () => {
   }
 
   const handleExportClick = () => {
-    var img = editorCanvas.toDataURL("image/png");
-    console.log("IMG: ", img);
-    document.write('<a href="'+img+'"><img src="'+img+'"/></a>');
+    const width: number = image?.width || 0;
+    const height: number = image?.height || 0;
+    const imgEncoded: string = canvasRef.current?.toDataURL() as string;
+
+    const settings = getImageSettings({imgEncoded, width, height, options });
+
+    saveSettingsFile(settings);
+  }
+
+  const getImageSettings = (
+    {imgEncoded = "", width, height, options}:
+    {imgEncoded: string, width: number, height: number, options:any }
+  ) => {
+    const { x, y, scale } = options;
+
+    return `{
+      "canvas": {
+        "width": ${width},
+        "height": ${height},
+        "photo" : {
+          "id": "image-configuration.json",
+          "src": ${imgEncoded},
+          "width": ${width * scale},
+          "height": ${height * scale},
+          "x": ${x},
+          "y": ${y}
+        }
+      }
+    }`;
+  }
+
+  const saveSettingsFile = (settings: string, fileName = "image-configuration.json") => {
+    const element = document.createElement("a");
+    const file = new Blob([settings], {type: "application/json"});
+    element.href = URL.createObjectURL(file);
+    element.download = fileName;
+    element.click();
   }
 
 	return (
@@ -119,7 +147,7 @@ export const PhotoEditor = () => {
 				<label htmlFor="fileSelector">Upload Images</label>
 				<input type="file" id="fileSelector" onChange={handlePhotoUpload} />
 			</div>
-			<canvas ref={canvasRef} width={500} height={350} style={{border: '1px solid red'}} />
+			<canvas ref={canvasRef} width={500} height={350} style={{border: '2px solid black'}} />
 
         <button onClick={handleIncreaseZoomClick}>+</button>
         <button onClick={handleDecreaseZoomClick}>-</button>
