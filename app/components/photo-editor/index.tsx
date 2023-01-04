@@ -25,8 +25,9 @@ export const PhotoEditor = () => {
   const handlePhotoUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     // get all selected Files
     const files = e.target.files as FileList;
+    let file: Blob;
     const reader = new FileReader();
-    let file;
+    // e.target.value = '';
     for (let i = 0; i < files.length; ++i) {
       file = files[i];
       // check if file is valid Image (just a MIME check)
@@ -62,44 +63,7 @@ export const PhotoEditor = () => {
           reader.readAsDataURL(file);
           // process just one file
           return;
-        // case 'application/json':
-        //   // const reader = new FileReader();
-        //   reader.onload = (e: ProgressEvent<FileReader>) => {
-        //     reader.readAsText(file);
-        //     reader.onload = function () {
-        //       const {
-        //         canvas: { photo, width, height },
-        //       } = JSON.parse(reader.result as string);
-
-        //       const img = new Image();
-        //       img.src = photo.src;
-        //       img.onload = () => {
-        //         if (canvasRef.current) {
-        //           const editorCanvas = canvasRef.current;
-        //           let scaleFactor = Math.max(photo.width / img.width, photo.height / img.height);
-
-        //           setOptions({
-        //             x: photo.x,
-        //             y: photo.y,
-        //             scale: scaleFactor,
-        //           });
-        //           setImage(img);
-        //         }
-        //       };
-        //     };
-        //   };
-      }
-    }
-  };
-
-  const handlePhotoImport = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    const files = e.target.files as FileList;
-    let file: Blob;
-    for (let i = 0; i < files.length; ++i) {
-      file = files[i];
-      switch (file.type) {
         case 'application/json':
-          const reader = new FileReader();
           reader.onload = (e: ProgressEvent<FileReader>) => {
             reader.readAsText(file);
             reader.onload = function () {
@@ -111,7 +75,6 @@ export const PhotoEditor = () => {
               img.src = photo.src;
               img.onload = () => {
                 if (canvasRef.current) {
-                  const editorCanvas = canvasRef.current;
                   let scaleFactor = Math.max(photo.width / img.width, photo.height / img.height);
 
                   setOptions({
@@ -236,12 +199,13 @@ export const PhotoEditor = () => {
     <>
       <div>
         <h1>Photo Editor</h1>
-        <label htmlFor="fileSelector">Upload Images</label>
-        <input type="file" id="fileSelector" onChange={handlePhotoUpload} />
-      </div>
-      <div>
-        <label htmlFor="fileSelector">Import Photo Settings</label>
-        <input type="file" id="fileSelector" onChange={handlePhotoImport} />
+        <label htmlFor="fileSelector">Upload Images or Configuration </label>
+        <input
+          type="file"
+          id="fileSelector"
+          onChange={handlePhotoUpload}
+          onClick={(e: React.MouseEvent<HTMLElement>) => ((e.target as HTMLInputElement).value = '')}
+        />
       </div>
       <canvas ref={canvasRef} width={500} height={350} style={{ border: '2px solid black' }} />
 
