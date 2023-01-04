@@ -3,20 +3,34 @@ import {useState, useEffect, useRef} from 'react';
 
 export const PhotoEditor = () => {
 	const [image, setImage] = useState<HTMLImageElement>();
+  const [options, setOptions] = useState({x: 0, y: 0, scale: 1});
 	const canvasRef = useRef<HTMLCanvasElement>(null);
+
+  let editorCanvas: {
+    width: number;
+    height: number;
+    getContext(arg0: string): unknown; toDataURL: (arg0: string) => any; 
+  };
 
 	useEffect(() => {
 		if (image && canvasRef.current) {
 			const canvas = canvasRef.current;
 			const ctx = canvas.getContext('2d');
-			const width = image.naturalWidth;
-			const height = image.naturalHeight;
-			canvas.width = 500;
-			canvas.height = 500 * height / width;
+			// const width = image.naturalWidth;
+			// const height = image.naturalHeight;
+			// canvas.width = 500;
+			// canvas.height = 500 * height / width;
 
-			ctx?.drawImage(image, 0, 0, width, height, 0, 0, canvas.width, canvas.height);
+			// ctx?.drawImage(image, 0, 0, width, height, 0, 0, canvas.width, canvas.height);
+
+      // Finding the new width and height based on the scale factor
+      let newWidth = image.width * options.scale;
+      let newHeight = image.height * options.scale;
+
+      ctx?.clearRect(0, 0, canvas.width, canvas.height);
+      ctx?.drawImage(image, options.x, options.y, newWidth, newHeight);
 		}
-	}, [image]);
+	}, [image, options.x, options.y, options.scale]);
 
 	const handlePhotoUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
 		// get all selected Files
@@ -35,7 +49,24 @@ export const PhotoEditor = () => {
 						// create HTMLImageElement holding image data
 						const img = new Image();
 						img.src = reader.result as string;
-						img.onload = () => setImage(img)
+						img.onload = () => {
+              if (canvasRef.current) {
+                const editorCanvas = canvasRef.current;
+                let scaleFactor = Math.max(editorCanvas?.width / img.width, editorCanvas?.height / img.height);
+                
+                // Finding the new width and height based on the scale factor
+                let newWidth = img.width * scaleFactor;
+                let newHeight = img.height * scaleFactor;
+                
+                // get the top left position of the image
+                // in order to center the image within the canvas
+                let x = (editorCanvas.width / 2) - (newWidth / 2);
+                let y = (editorCanvas.height / 2) - (newHeight / 2);
+
+                setOptions({x, y, scale: scaleFactor});
+                setImage(img);
+              }
+            }
 					};
 					reader.readAsDataURL( file );
 					// process just one file
@@ -44,6 +75,54 @@ export const PhotoEditor = () => {
 		}
 	};
 
+  const handleIncreaseZoomClick = () => {
+    const {x, y, scale} = calculateZoomOptions(1.1);
+
+    setOptions({x, y, scale});
+  }
+
+  const handleDecreaseZoomClick = () => {
+    const {x, y, scale} = calculateZoomOptions(0.9);
+
+    setOptions({x, y, scale});
+  }
+
+  const calculateZoomOptions = (scale: number) => {
+    const currentWidth = image?.width || 0 * options.scale;
+    const currentHeight = image?.height || 0 * options.scale;
+    
+    // Finding the new width and height based on the scale factor
+    const newWidth = currentWidth * scale;
+    const newHeight = currentHeight * scale;
+    
+    const xOffset = (newWidth - currentWidth) / 2;
+    const yOffset = (newHeight - currentHeight) / 2;
+
+    return {x: options.x - xOffset, y: options.y - yOffset, scale: options.scale * scale};
+  }
+
+  const handleTopClick = () => {
+    setOptions({x: options.x, y: options.y - 10, scale: options.scale});
+  }
+
+  const handleBottomClick = () => {
+    setOptions({x: options.x, y: options.y + 10, scale: options.scale});
+  }
+
+  const handleRightClick = () => {
+    setOptions({x: options.x + 10, y: options.y, scale: options.scale});
+  }
+
+  const handleLeftClick = () => {
+    setOptions({x: options.x - 10, y: options.y, scale: options.scale});
+  }
+
+  const handleExportClick = () => {
+    var img = editorCanvas.toDataURL("image/png");
+    console.log("IMG: ", img);
+    document.write('<a href="'+img+'"><img src="'+img+'"/></a>');
+  }
+
 	return (
 		<>
 			<div>
@@ -51,7 +130,17 @@ export const PhotoEditor = () => {
 				<label htmlFor="fileSelector">Upload Images</label>
 				<input type="file" id="fileSelector" onChange={handlePhotoUpload} />
 			</div>
-			<canvas ref={canvasRef} />
+			<canvas ref={canvasRef} width={500} height={350} style={{border: '1px solid red'}} />
+
+        <button onClick={handleIncreaseZoomClick}>+</button>
+        <button onClick={handleDecreaseZoomClick}>-</button>
+
+        <button onClick={handleTopClick}>Top</button>
+        <button onClick={handleBottomClick}>Bottom</button>
+        <button onClick={handleRightClick}>Right</button>
+        <button onClick={handleLeftClick}>Left</button>
+
+        <button onClick={handleExportClick}>Export</button>
 		</>
 	);
 };
