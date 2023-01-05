@@ -129,26 +129,6 @@ const useCanvas = () => {
     }
   };
 
-  //   useEffect(() => {
-  //     const canvas = canvasRef.current;
-  //     const context = canvas.getContext(options.context || '2d');
-  //     let animationFrameId;
-
-  //     const render = () => {
-  //       draw(context);
-  //       animationFrameId = window.requestAnimationFrame(render);
-  //     };
-  //     render();
-
-  //     return () => {
-  //       window.cancelAnimationFrame(animationFrameId);
-  //     };
-  //   });
-
-  //   const draw = ctx => {
-  //     console.log('DRAW');
-  //   };
-
   return { canvasRef, image, setImage, options, setOptions, setImageAction };
 };
 
