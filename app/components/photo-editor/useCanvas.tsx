@@ -105,8 +105,6 @@ const useCanvas = () => {
   };
 
   const setImageAction = (action: ImageAction) => {
-    console.log('action: ', action);
-
     switch (action) {
       case ImageAction.ZoomIn:
         setZoomIn();

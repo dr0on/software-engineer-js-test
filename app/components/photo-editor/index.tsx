@@ -1,5 +1,6 @@
 import React from 'react';
 import useCanvas, { ImageAction } from './useCanvas';
+import { toDataURL, saveSettingsFile } from './ImageSettingsUtils';
 
 export const PhotoEditor = () => {
   const { canvasRef, image, setImage, options, setOptions, setImageAction } = useCanvas();
@@ -82,17 +83,6 @@ export const PhotoEditor = () => {
     saveSettingsFile(JSON.stringify(settings));
   };
 
-  const toDataURL = (img: HTMLImageElement) => {
-    let canvas = document.createElement('canvas');
-    canvas.height = img.naturalHeight;
-    canvas.width = img.naturalWidth;
-
-    let ctx = canvas.getContext('2d');
-    ctx?.drawImage(img, 0, 0);
-
-    return canvas.toDataURL();
-  };
-
   const getImageSettings = ({
     encodedImg = '',
     width,
@@ -118,14 +108,6 @@ export const PhotoEditor = () => {
         },
       },
     };
-  };
-
-  const saveSettingsFile = (settings: string, fileName = 'image-configuration.json') => {
-    const element = document.createElement('a');
-    const file = new Blob([settings], { type: 'application/json' });
-    element.href = URL.createObjectURL(file);
-    element.download = fileName;
-    element.click();
   };
 
   return (
