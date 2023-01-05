@@ -2,7 +2,7 @@ import React from 'react';
 import { useState, useEffect, useRef } from 'react';
 
 export const PhotoEditor = () => {
-  const [image, setImage] = useState<HTMLImageElement>();
+  const [image, setImage] = useState<HTMLImageElement>(new Image());
   const [options, setOptions] = useState({ x: 0, y: 0, scale: 1 });
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
@@ -23,22 +23,18 @@ export const PhotoEditor = () => {
   }, [image, options.x, options.y, options.scale]);
 
   const handlePhotoUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    // get all selected Files
     const files = e.target.files as FileList;
     let file: Blob;
     const reader = new FileReader();
-    // e.target.value = '';
+
     for (let i = 0; i < files.length; ++i) {
       file = files[i];
-      // check if file is valid Image (just a MIME check)
+
       switch (file.type) {
         case 'image/jpeg':
         case 'image/png':
         case 'image/gif':
-          // read Image contents from file
-          // const reader = new FileReader();
           reader.onload = (e: ProgressEvent<FileReader>) => {
-            // create HTMLImageElement holding image data
             const img = new Image();
             img.src = reader.result as string;
             img.onload = () => {
@@ -61,8 +57,7 @@ export const PhotoEditor = () => {
             };
           };
           reader.readAsDataURL(file);
-          // process just one file
-          return;
+          break;
         case 'application/json':
           reader.onload = (e: ProgressEvent<FileReader>) => {
             reader.readAsText(file);
@@ -88,9 +83,10 @@ export const PhotoEditor = () => {
             };
           };
           reader.readAsDataURL(file);
-          // process just one file
-          return;
+          break;
       }
+      // process just one file
+      return;
     }
   };
 
@@ -101,9 +97,11 @@ export const PhotoEditor = () => {
   };
 
   const handleDecreaseZoomClick = () => {
-    const { x, y, scale } = calculateZoomOptions(image, 0.9);
+    if (!isTopLimit() && !isBottomLimit() && !isLeftLimit() && !isRightLimit()) {
+      const { x, y, scale } = calculateZoomOptions(image, 0.9);
 
-    setOptions({ x, y, scale });
+      setOptions({ x, y, scale });
+    }
   };
 
   const calculateZoomOptions = (img: any, scale: number) => {
@@ -124,19 +122,56 @@ export const PhotoEditor = () => {
   };
 
   const handleTopClick = () => {
-    setOptions({ x: options.x, y: options.y + 10, scale: options.scale });
+    // console.log('handleTopClick: ', options);
+    const y = options.y + 10 > 0 ? 0 : options.y + 10;
+    setOptions({ x: options.x, y, scale: options.scale });
   };
 
+  const isBottomLimit = () => {
+    const canvasHeight = canvasRef.current?.height || 0;
+    const scaledHeight = image.height * options.scale;
+
+    return options.y + scaledHeight - 10 < canvasHeight;
+  };
+
+  const isLeftLimit = () => {
+    const canvasWidth = canvasRef.current?.width || 0;
+    const scaledWidth = image.width * options.scale;
+
+    return options.x + scaledWidth - 10 < canvasWidth;
+  };
+
+  const isTopLimit = () => options.y + 10 > 0;
+
+  const isRightLimit = () => options.x + 10 > 0;
+
   const handleBottomClick = () => {
-    setOptions({ x: options.x, y: options.y - 10, scale: options.scale });
+    // console.log('handleBottomClick: ', options);
+
+    const canvasHeight = canvasRef.current?.height || 0;
+    let y = isBottomLimit() ? canvasHeight - image.height * options.scale : options.y - 10;
+
+    setOptions({ x: options.x, y, scale: options.scale });
   };
 
   const handleRightClick = () => {
-    setOptions({ x: options.x + 10, y: options.y, scale: options.scale });
+    // console.log('handleRightClick: ', options);
+    const x = options.x + 10 > 0 ? 0 : options.x + 10;
+
+    setOptions({ x, y: options.y, scale: options.scale });
   };
 
   const handleLeftClick = () => {
-    setOptions({ x: options.x - 10, y: options.y, scale: options.scale });
+    console.log('handleLeftClick: ', options);
+    const canvasWidth = canvasRef.current?.width || 0;
+    const imageWidth = image.width || 0;
+    let x = 0;
+    if (options.x + imageWidth * options.scale - 10 < canvasWidth) {
+      x = canvasWidth - imageWidth * options.scale;
+    } else {
+      x = options.x - 10;
+    }
+    setOptions({ x, y: options.y, scale: options.scale });
   };
 
   const handleExportClick = () => {
