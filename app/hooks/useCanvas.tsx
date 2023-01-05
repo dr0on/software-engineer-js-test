@@ -9,6 +9,8 @@ export const enum ImageAction {
   ZoomOut,
 }
 
+const MOVE_STEP = 10;
+
 const useCanvas = () => {
   const [image, setImage] = useState<HTMLImageElement>(new Image());
   const [options, setOptions] = useState({ x: 0, y: 0, scale: 1 });
@@ -52,17 +54,17 @@ const useCanvas = () => {
 
   const isBottomLimit = () => {
     const scaledHeight = image.height * options.scale;
-    return options.y + scaledHeight - 10 < canvasHeight;
+    return options.y + scaledHeight - MOVE_STEP < canvasHeight;
   };
 
   const isLeftLimit = () => {
     const scaledWidth = image.width * options.scale;
-    return options.x + scaledWidth - 10 < canvasWidth;
+    return options.x + scaledWidth - MOVE_STEP < canvasWidth;
   };
 
-  const isTopLimit = () => options.y + 10 > 0;
+  const isTopLimit = () => options.y + MOVE_STEP > 0;
 
-  const isRightLimit = () => options.x + 10 > 0;
+  const isRightLimit = () => options.x + MOVE_STEP > 0;
 
   const setZoomIn = () => {
     const { x, y, scale } = calculateZoomOptions(image, 1.1);
@@ -77,22 +79,22 @@ const useCanvas = () => {
   };
 
   const setMoveTop = () => {
-    const y = isTopLimit() ? 0 : options.y + 10;
+    const y = isTopLimit() ? 0 : options.y + MOVE_STEP;
     setOptions({ x: options.x, y, scale: options.scale });
   };
 
   const setMoveBottom = () => {
-    let y = isBottomLimit() ? canvasHeight - image.height * options.scale : options.y - 10;
+    let y = isBottomLimit() ? canvasHeight - image.height * options.scale : options.y - MOVE_STEP;
     setOptions({ x: options.x, y, scale: options.scale });
   };
 
   const setMoveRight = () => {
-    const x = isRightLimit() ? 0 : options.x + 10;
+    const x = isRightLimit() ? 0 : options.x + MOVE_STEP;
     setOptions({ x, y: options.y, scale: options.scale });
   };
 
   const setMoveLeft = () => {
-    let x = isLeftLimit() ? canvasWidth - image.width * options.scale : options.x - 10;
+    let x = isLeftLimit() ? canvasWidth - image.width * options.scale : options.x - MOVE_STEP;
     setOptions({ x, y: options.y, scale: options.scale });
   };
 
