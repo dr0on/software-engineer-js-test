@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`PhotoEditor useCanvas should move image to top 1`] = `
+exports[`useCanvas should move image to top 1`] = `
 [
   {
     "props": {
@@ -47,7 +47,7 @@ exports[`PhotoEditor useCanvas should move image to top 1`] = `
 ]
 `;
 
-exports[`PhotoEditor useCanvas should zoom in image 1`] = `
+exports[`useCanvas should zoom in image 1`] = `
 [
   {
     "props": {
