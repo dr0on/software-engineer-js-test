@@ -1,5 +1,506 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`useCanvas should move image bottom 1`] = `
+[
+  {
+    "props": {
+      "height": 300,
+      "width": 400,
+      "x": 0,
+      "y": 0,
+    },
+    "transform": [
+      1,
+      0,
+      0,
+      1,
+      0,
+      0,
+    ],
+    "type": "clearRect",
+  },
+  {
+    "props": {
+      "dHeight": 0,
+      "dWidth": 0,
+      "dx": 0,
+      "dy": 0,
+      "img": <img />,
+      "sHeight": 0,
+      "sWidth": 0,
+      "sx": 0,
+      "sy": 0,
+    },
+    "transform": [
+      1,
+      0,
+      0,
+      1,
+      0,
+      0,
+    ],
+    "type": "drawImage",
+  },
+  {
+    "props": {
+      "height": 300,
+      "width": 400,
+      "x": 0,
+      "y": 0,
+    },
+    "transform": [
+      1,
+      0,
+      0,
+      1,
+      0,
+      0,
+    ],
+    "type": "clearRect",
+  },
+  {
+    "props": {
+      "dHeight": 0,
+      "dWidth": 0,
+      "dx": 0,
+      "dy": -15,
+      "img": <img />,
+      "sHeight": 0,
+      "sWidth": 0,
+      "sx": 0,
+      "sy": 0,
+    },
+    "transform": [
+      1,
+      0,
+      0,
+      1,
+      0,
+      0,
+    ],
+    "type": "drawImage",
+  },
+  {
+    "props": {
+      "height": 300,
+      "width": 400,
+      "x": 0,
+      "y": 0,
+    },
+    "transform": [
+      1,
+      0,
+      0,
+      1,
+      0,
+      0,
+    ],
+    "type": "clearRect",
+  },
+  {
+    "props": {
+      "dHeight": 700,
+      "dWidth": 700,
+      "dx": 0,
+      "dy": -15,
+      "img": <img
+        height="700"
+        width="700"
+      />,
+      "sHeight": 700,
+      "sWidth": 700,
+      "sx": 0,
+      "sy": 0,
+    },
+    "transform": [
+      1,
+      0,
+      0,
+      1,
+      0,
+      0,
+    ],
+    "type": "drawImage",
+  },
+  {
+    "props": {
+      "height": 300,
+      "width": 400,
+      "x": 0,
+      "y": 0,
+    },
+    "transform": [
+      1,
+      0,
+      0,
+      1,
+      0,
+      0,
+    ],
+    "type": "clearRect",
+  },
+  {
+    "props": {
+      "dHeight": 700,
+      "dWidth": 700,
+      "dx": 0,
+      "dy": -25,
+      "img": <img
+        height="700"
+        width="700"
+      />,
+      "sHeight": 700,
+      "sWidth": 700,
+      "sx": 0,
+      "sy": 0,
+    },
+    "transform": [
+      1,
+      0,
+      0,
+      1,
+      0,
+      0,
+    ],
+    "type": "drawImage",
+  },
+]
+`;
+
+exports[`useCanvas should move image left 1`] = `
+[
+  {
+    "props": {
+      "height": 300,
+      "width": 400,
+      "x": 0,
+      "y": 0,
+    },
+    "transform": [
+      1,
+      0,
+      0,
+      1,
+      0,
+      0,
+    ],
+    "type": "clearRect",
+  },
+  {
+    "props": {
+      "dHeight": 0,
+      "dWidth": 0,
+      "dx": 0,
+      "dy": 0,
+      "img": <img />,
+      "sHeight": 0,
+      "sWidth": 0,
+      "sx": 0,
+      "sy": 0,
+    },
+    "transform": [
+      1,
+      0,
+      0,
+      1,
+      0,
+      0,
+    ],
+    "type": "drawImage",
+  },
+  {
+    "props": {
+      "height": 300,
+      "width": 400,
+      "x": 0,
+      "y": 0,
+    },
+    "transform": [
+      1,
+      0,
+      0,
+      1,
+      0,
+      0,
+    ],
+    "type": "clearRect",
+  },
+  {
+    "props": {
+      "dHeight": 0,
+      "dWidth": 0,
+      "dx": 15,
+      "dy": 0,
+      "img": <img />,
+      "sHeight": 0,
+      "sWidth": 0,
+      "sx": 0,
+      "sy": 0,
+    },
+    "transform": [
+      1,
+      0,
+      0,
+      1,
+      0,
+      0,
+    ],
+    "type": "drawImage",
+  },
+  {
+    "props": {
+      "height": 300,
+      "width": 400,
+      "x": 0,
+      "y": 0,
+    },
+    "transform": [
+      1,
+      0,
+      0,
+      1,
+      0,
+      0,
+    ],
+    "type": "clearRect",
+  },
+  {
+    "props": {
+      "dHeight": 700,
+      "dWidth": 700,
+      "dx": 15,
+      "dy": 0,
+      "img": <img
+        height="700"
+        width="700"
+      />,
+      "sHeight": 700,
+      "sWidth": 700,
+      "sx": 0,
+      "sy": 0,
+    },
+    "transform": [
+      1,
+      0,
+      0,
+      1,
+      0,
+      0,
+    ],
+    "type": "drawImage",
+  },
+  {
+    "props": {
+      "height": 300,
+      "width": 400,
+      "x": 0,
+      "y": 0,
+    },
+    "transform": [
+      1,
+      0,
+      0,
+      1,
+      0,
+      0,
+    ],
+    "type": "clearRect",
+  },
+  {
+    "props": {
+      "dHeight": 700,
+      "dWidth": 700,
+      "dx": 5,
+      "dy": 0,
+      "img": <img
+        height="700"
+        width="700"
+      />,
+      "sHeight": 700,
+      "sWidth": 700,
+      "sx": 0,
+      "sy": 0,
+    },
+    "transform": [
+      1,
+      0,
+      0,
+      1,
+      0,
+      0,
+    ],
+    "type": "drawImage",
+  },
+]
+`;
+
+exports[`useCanvas should move image right 1`] = `
+[
+  {
+    "props": {
+      "height": 300,
+      "width": 400,
+      "x": 0,
+      "y": 0,
+    },
+    "transform": [
+      1,
+      0,
+      0,
+      1,
+      0,
+      0,
+    ],
+    "type": "clearRect",
+  },
+  {
+    "props": {
+      "dHeight": 0,
+      "dWidth": 0,
+      "dx": 0,
+      "dy": 0,
+      "img": <img />,
+      "sHeight": 0,
+      "sWidth": 0,
+      "sx": 0,
+      "sy": 0,
+    },
+    "transform": [
+      1,
+      0,
+      0,
+      1,
+      0,
+      0,
+    ],
+    "type": "drawImage",
+  },
+  {
+    "props": {
+      "height": 300,
+      "width": 400,
+      "x": 0,
+      "y": 0,
+    },
+    "transform": [
+      1,
+      0,
+      0,
+      1,
+      0,
+      0,
+    ],
+    "type": "clearRect",
+  },
+  {
+    "props": {
+      "dHeight": 0,
+      "dWidth": 0,
+      "dx": -15,
+      "dy": 0,
+      "img": <img />,
+      "sHeight": 0,
+      "sWidth": 0,
+      "sx": 0,
+      "sy": 0,
+    },
+    "transform": [
+      1,
+      0,
+      0,
+      1,
+      0,
+      0,
+    ],
+    "type": "drawImage",
+  },
+  {
+    "props": {
+      "height": 300,
+      "width": 400,
+      "x": 0,
+      "y": 0,
+    },
+    "transform": [
+      1,
+      0,
+      0,
+      1,
+      0,
+      0,
+    ],
+    "type": "clearRect",
+  },
+  {
+    "props": {
+      "dHeight": 700,
+      "dWidth": 700,
+      "dx": -15,
+      "dy": 0,
+      "img": <img
+        height="700"
+        width="700"
+      />,
+      "sHeight": 700,
+      "sWidth": 700,
+      "sx": 0,
+      "sy": 0,
+    },
+    "transform": [
+      1,
+      0,
+      0,
+      1,
+      0,
+      0,
+    ],
+    "type": "drawImage",
+  },
+  {
+    "props": {
+      "height": 300,
+      "width": 400,
+      "x": 0,
+      "y": 0,
+    },
+    "transform": [
+      1,
+      0,
+      0,
+      1,
+      0,
+      0,
+    ],
+    "type": "clearRect",
+  },
+  {
+    "props": {
+      "dHeight": 700,
+      "dWidth": 700,
+      "dx": -5,
+      "dy": 0,
+      "img": <img
+        height="700"
+        width="700"
+      />,
+      "sHeight": 700,
+      "sWidth": 700,
+      "sx": 0,
+      "sy": 0,
+    },
+    "transform": [
+      1,
+      0,
+      0,
+      1,
+      0,
+      0,
+    ],
+    "type": "drawImage",
+  },
+]
+`;
+
 exports[`useCanvas should move image to top 1`] = `
 [
   {
@@ -21,16 +522,136 @@ exports[`useCanvas should move image to top 1`] = `
   },
   {
     "props": {
-      "dHeight": 1000,
-      "dWidth": 1000,
+      "dHeight": 0,
+      "dWidth": 0,
+      "dx": 0,
+      "dy": 0,
+      "img": <img />,
+      "sHeight": 0,
+      "sWidth": 0,
+      "sx": 0,
+      "sy": 0,
+    },
+    "transform": [
+      1,
+      0,
+      0,
+      1,
+      0,
+      0,
+    ],
+    "type": "drawImage",
+  },
+  {
+    "props": {
+      "height": 300,
+      "width": 400,
+      "x": 0,
+      "y": 0,
+    },
+    "transform": [
+      1,
+      0,
+      0,
+      1,
+      0,
+      0,
+    ],
+    "type": "clearRect",
+  },
+  {
+    "props": {
+      "dHeight": 0,
+      "dWidth": 0,
+      "dx": 0,
+      "dy": -15,
+      "img": <img />,
+      "sHeight": 0,
+      "sWidth": 0,
+      "sx": 0,
+      "sy": 0,
+    },
+    "transform": [
+      1,
+      0,
+      0,
+      1,
+      0,
+      0,
+    ],
+    "type": "drawImage",
+  },
+  {
+    "props": {
+      "height": 300,
+      "width": 400,
+      "x": 0,
+      "y": 0,
+    },
+    "transform": [
+      1,
+      0,
+      0,
+      1,
+      0,
+      0,
+    ],
+    "type": "clearRect",
+  },
+  {
+    "props": {
+      "dHeight": 700,
+      "dWidth": 700,
       "dx": 0,
       "dy": -15,
       "img": <img
-        height="1000"
-        width="1000"
+        height="700"
+        width="700"
       />,
-      "sHeight": 1000,
-      "sWidth": 1000,
+      "sHeight": 700,
+      "sWidth": 700,
+      "sx": 0,
+      "sy": 0,
+    },
+    "transform": [
+      1,
+      0,
+      0,
+      1,
+      0,
+      0,
+    ],
+    "type": "drawImage",
+  },
+  {
+    "props": {
+      "height": 300,
+      "width": 400,
+      "x": 0,
+      "y": 0,
+    },
+    "transform": [
+      1,
+      0,
+      0,
+      1,
+      0,
+      0,
+    ],
+    "type": "clearRect",
+  },
+  {
+    "props": {
+      "dHeight": 700,
+      "dWidth": 700,
+      "dx": 0,
+      "dy": -5,
+      "img": <img
+        height="700"
+        width="700"
+      />,
+      "sHeight": 700,
+      "sWidth": 700,
       "sx": 0,
       "sy": 0,
     },
@@ -68,16 +689,303 @@ exports[`useCanvas should zoom in image 1`] = `
   },
   {
     "props": {
-      "dHeight": 100,
-      "dWidth": 200,
+      "dHeight": 0,
+      "dWidth": 0,
       "dx": 0,
       "dy": 0,
+      "img": <img />,
+      "sHeight": 0,
+      "sWidth": 0,
+      "sx": 0,
+      "sy": 0,
+    },
+    "transform": [
+      1,
+      0,
+      0,
+      1,
+      0,
+      0,
+    ],
+    "type": "drawImage",
+  },
+  {
+    "props": {
+      "height": 300,
+      "width": 400,
+      "x": 0,
+      "y": 0,
+    },
+    "transform": [
+      1,
+      0,
+      0,
+      1,
+      0,
+      0,
+    ],
+    "type": "clearRect",
+  },
+  {
+    "props": {
+      "dHeight": 0,
+      "dWidth": 0,
+      "dx": -50,
+      "dy": -50,
+      "img": <img />,
+      "sHeight": 0,
+      "sWidth": 0,
+      "sx": 0,
+      "sy": 0,
+    },
+    "transform": [
+      1,
+      0,
+      0,
+      1,
+      0,
+      0,
+    ],
+    "type": "drawImage",
+  },
+  {
+    "props": {
+      "height": 300,
+      "width": 400,
+      "x": 0,
+      "y": 0,
+    },
+    "transform": [
+      1,
+      0,
+      0,
+      1,
+      0,
+      0,
+    ],
+    "type": "clearRect",
+  },
+  {
+    "props": {
+      "dHeight": 700,
+      "dWidth": 700,
+      "dx": -50,
+      "dy": -50,
       "img": <img
-        height="100"
-        width="200"
+        height="700"
+        width="700"
       />,
-      "sHeight": 100,
-      "sWidth": 200,
+      "sHeight": 700,
+      "sWidth": 700,
+      "sx": 0,
+      "sy": 0,
+    },
+    "transform": [
+      1,
+      0,
+      0,
+      1,
+      0,
+      0,
+    ],
+    "type": "drawImage",
+  },
+  {
+    "props": {
+      "height": 300,
+      "width": 400,
+      "x": 0,
+      "y": 0,
+    },
+    "transform": [
+      1,
+      0,
+      0,
+      1,
+      0,
+      0,
+    ],
+    "type": "clearRect",
+  },
+  {
+    "props": {
+      "dHeight": 700,
+      "dWidth": 700,
+      "dx": -85.00000000000006,
+      "dy": -85.00000000000006,
+      "img": <img
+        height="700"
+        width="700"
+      />,
+      "sHeight": 700,
+      "sWidth": 700,
+      "sx": 0,
+      "sy": 0,
+    },
+    "transform": [
+      1,
+      0,
+      0,
+      1,
+      0,
+      0,
+    ],
+    "type": "drawImage",
+  },
+]
+`;
+
+exports[`useCanvas should zoom out image 1`] = `
+[
+  {
+    "props": {
+      "height": 300,
+      "width": 400,
+      "x": 0,
+      "y": 0,
+    },
+    "transform": [
+      1,
+      0,
+      0,
+      1,
+      0,
+      0,
+    ],
+    "type": "clearRect",
+  },
+  {
+    "props": {
+      "dHeight": 0,
+      "dWidth": 0,
+      "dx": 0,
+      "dy": 0,
+      "img": <img />,
+      "sHeight": 0,
+      "sWidth": 0,
+      "sx": 0,
+      "sy": 0,
+    },
+    "transform": [
+      1,
+      0,
+      0,
+      1,
+      0,
+      0,
+    ],
+    "type": "drawImage",
+  },
+  {
+    "props": {
+      "height": 300,
+      "width": 400,
+      "x": 0,
+      "y": 0,
+    },
+    "transform": [
+      1,
+      0,
+      0,
+      1,
+      0,
+      0,
+    ],
+    "type": "clearRect",
+  },
+  {
+    "props": {
+      "dHeight": 0,
+      "dWidth": 0,
+      "dx": -50,
+      "dy": -50,
+      "img": <img />,
+      "sHeight": 0,
+      "sWidth": 0,
+      "sx": 0,
+      "sy": 0,
+    },
+    "transform": [
+      1,
+      0,
+      0,
+      1,
+      0,
+      0,
+    ],
+    "type": "drawImage",
+  },
+  {
+    "props": {
+      "height": 300,
+      "width": 400,
+      "x": 0,
+      "y": 0,
+    },
+    "transform": [
+      1,
+      0,
+      0,
+      1,
+      0,
+      0,
+    ],
+    "type": "clearRect",
+  },
+  {
+    "props": {
+      "dHeight": 700,
+      "dWidth": 700,
+      "dx": -50,
+      "dy": -50,
+      "img": <img
+        height="700"
+        width="700"
+      />,
+      "sHeight": 700,
+      "sWidth": 700,
+      "sx": 0,
+      "sy": 0,
+    },
+    "transform": [
+      1,
+      0,
+      0,
+      1,
+      0,
+      0,
+    ],
+    "type": "drawImage",
+  },
+  {
+    "props": {
+      "height": 300,
+      "width": 400,
+      "x": 0,
+      "y": 0,
+    },
+    "transform": [
+      1,
+      0,
+      0,
+      1,
+      0,
+      0,
+    ],
+    "type": "clearRect",
+  },
+  {
+    "props": {
+      "dHeight": 700,
+      "dWidth": 700,
+      "dx": -15,
+      "dy": -15,
+      "img": <img
+        height="700"
+        width="700"
+      />,
+      "sHeight": 700,
+      "sWidth": 700,
       "sx": 0,
       "sy": 0,
     },
