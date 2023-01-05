@@ -61,16 +61,14 @@ export const PhotoEditor = () => {
     const img = new Image();
     img.src = photo.src;
     img.onload = () => {
-      if (canvasRef.current) {
-        let scaleFactor = Math.max(photo.width / img.width, photo.height / img.height);
+      let scaleFactor = Math.max(photo.width / img.width, photo.height / img.height);
 
-        setOptions({
-          x: photo.x,
-          y: photo.y,
-          scale: scaleFactor,
-        });
-        setImage(img);
-      }
+      setOptions({
+        x: photo.x,
+        y: photo.y,
+        scale: scaleFactor,
+      });
+      setImage(img);
     };
   };
 
