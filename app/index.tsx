@@ -1,5 +1,10 @@
-import React from "react";
-import { render } from "react-dom";
+import React from 'react';
+import ReactDOM from 'react-dom/client';
 import { PhotoEditor } from './components/photo-editor';
 
-render(<PhotoEditor />, document.body);
+const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
+root.render(
+  <React.StrictMode>
+    <PhotoEditor />
+  </React.StrictMode>
+);
