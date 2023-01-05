@@ -4,6 +4,50 @@ body {
   height: 100%;
 }
 
-canvas {
-  margin: 20px 0;
+.file-selector {
+  padding: 20px 0;
+}
+
+.photo-editor {
+  display: flex;
+
+  .canvas {
+    border: 2px solid black;
+  }
+
+  .edit-panel {
+    padding: 0 20px;
+
+    .zoom-controls {
+      padding-bottom: 20px;
+    }
+
+    .move-controls {
+      width: 150px;
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      grid-template-rows: 1fr 1fr 1fr;
+      grid-template-areas:
+        ". top ."
+        "left . right"
+        ". bottom .";
+      padding: 100px 0;
+
+      .top {
+          grid-area: top;
+        }
+      
+      .bottom {
+        grid-area: bottom;
+      }
+
+      .right {
+        grid-area: right;
+      }
+
+      .left {
+        grid-area: left;
+      }
+    }
+  }
 }

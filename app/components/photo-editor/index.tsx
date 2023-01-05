@@ -122,7 +122,6 @@ export const PhotoEditor = () => {
   };
 
   const handleTopClick = () => {
-    // console.log('handleTopClick: ', options);
     const y = options.y + 10 > 0 ? 0 : options.y + 10;
     setOptions({ x: options.x, y, scale: options.scale });
   };
@@ -146,8 +145,6 @@ export const PhotoEditor = () => {
   const isRightLimit = () => options.x + 10 > 0;
 
   const handleBottomClick = () => {
-    // console.log('handleBottomClick: ', options);
-
     const canvasHeight = canvasRef.current?.height || 0;
     let y = isBottomLimit() ? canvasHeight - image.height * options.scale : options.y - 10;
 
@@ -155,22 +152,15 @@ export const PhotoEditor = () => {
   };
 
   const handleRightClick = () => {
-    // console.log('handleRightClick: ', options);
     const x = options.x + 10 > 0 ? 0 : options.x + 10;
 
     setOptions({ x, y: options.y, scale: options.scale });
   };
 
   const handleLeftClick = () => {
-    console.log('handleLeftClick: ', options);
     const canvasWidth = canvasRef.current?.width || 0;
-    const imageWidth = image.width || 0;
-    let x = 0;
-    if (options.x + imageWidth * options.scale - 10 < canvasWidth) {
-      x = canvasWidth - imageWidth * options.scale;
-    } else {
-      x = options.x - 10;
-    }
+    let x = isLeftLimit() ? canvasWidth - image.width * options.scale : options.x - 10;
+
     setOptions({ x, y: options.y, scale: options.scale });
   };
 
@@ -232,7 +222,7 @@ export const PhotoEditor = () => {
 
   return (
     <>
-      <div>
+      <div className="file-selector">
         <h1>Photo Editor</h1>
         <label htmlFor="fileSelector">Upload Images or Configuration </label>
         <input
@@ -242,17 +232,33 @@ export const PhotoEditor = () => {
           onClick={(e: React.MouseEvent<HTMLElement>) => ((e.target as HTMLInputElement).value = '')}
         />
       </div>
-      <canvas ref={canvasRef} width={500} height={350} style={{ border: '2px solid black' }} />
+      <div className="photo-editor">
+        <canvas className="canvas" ref={canvasRef} width={500} height={350} />
 
-      <button onClick={handleIncreaseZoomClick}>+</button>
-      <button onClick={handleDecreaseZoomClick}>-</button>
-
-      <button onClick={handleTopClick}>Top</button>
-      <button onClick={handleBottomClick}>Bottom</button>
-      <button onClick={handleRightClick}>Right</button>
-      <button onClick={handleLeftClick}>Left</button>
-
-      <button onClick={handleExportClick}>Export</button>
+        <div className="edit-panel">
+          <div className="zoom-controls">
+            <button onClick={handleIncreaseZoomClick}>+</button>
+            <button onClick={handleDecreaseZoomClick}>-</button>
+          </div>
+          <div className="move-controls">
+            <button className="top" onClick={handleTopClick}>
+              Top
+            </button>
+            <button className="bottom" onClick={handleBottomClick}>
+              Bottom
+            </button>
+            <button className="right" onClick={handleRightClick}>
+              Right
+            </button>
+            <button className="left" onClick={handleLeftClick}>
+              Left
+            </button>
+          </div>
+          <div className="export">
+            <button onClick={handleExportClick}>Export</button>
+          </div>
+        </div>
+      </div>
     </>
   );
 };
