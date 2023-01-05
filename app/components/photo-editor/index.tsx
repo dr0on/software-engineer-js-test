@@ -1,11 +1,11 @@
 import React from 'react';
 import useCanvas, { ImageAction } from './useCanvas';
-import { toDataURL, saveSettingsFile } from './ImageSettingsUtils';
+import { toDataURL, saveSettingsFile } from './settingsUtils';
 
 export const PhotoEditor = () => {
   const { canvasRef, image, setImage, options, setOptions, setImageAction } = useCanvas();
 
-  const handlePhotoUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files as FileList;
     let file: Blob;
     const reader = new FileReader();
@@ -17,60 +17,61 @@ export const PhotoEditor = () => {
         case 'image/jpeg':
         case 'image/png':
         case 'image/gif':
-          reader.onload = (e: ProgressEvent<FileReader>) => {
-            const img = new Image();
-            img.src = reader.result as string;
-            img.onload = () => {
-              if (canvasRef.current) {
-                const editorCanvas = canvasRef.current;
-                let scaleFactor = Math.max(editorCanvas?.width / img.width, editorCanvas?.height / img.height);
-
-                // Finding the new width and height based on the scale factor
-                let newWidth = img.width * scaleFactor;
-                let newHeight = img.height * scaleFactor;
-
-                // get the top left position of the image
-                // in order to center the image within the canvas
-                let x = editorCanvas.width / 2 - newWidth / 2;
-                let y = editorCanvas.height / 2 - newHeight / 2;
-
-                setOptions({ x, y, scale: scaleFactor });
-                setImage(img);
-              }
-            };
-          };
+          reader.onload = () => handleImageLoad(reader.result as string);
           reader.readAsDataURL(file);
           break;
         case 'application/json':
-          reader.onload = (e: ProgressEvent<FileReader>) => {
-            reader.readAsText(file);
-            reader.onload = function () {
-              const {
-                canvas: { photo, width, height },
-              } = JSON.parse(reader.result as string);
-
-              const img = new Image();
-              img.src = photo.src;
-              img.onload = () => {
-                if (canvasRef.current) {
-                  let scaleFactor = Math.max(photo.width / img.width, photo.height / img.height);
-
-                  setOptions({
-                    x: photo.x,
-                    y: photo.y,
-                    scale: scaleFactor,
-                  });
-                  setImage(img);
-                }
-              };
-            };
-          };
-          reader.readAsDataURL(file);
+          reader.readAsText(file);
+          reader.onload = () => handleFileLoad(reader.result as string);
           break;
       }
       // process just one file
       return;
     }
+  };
+
+  const handleImageLoad = (imageData: string) => {
+    const img = new Image();
+    img.src = imageData;
+    img.onload = () => {
+      if (canvasRef.current) {
+        const editorCanvas = canvasRef.current;
+        let scaleFactor = Math.max(editorCanvas?.width / img.width, editorCanvas?.height / img.height);
+
+        // Finding the new width and height based on the scale factor
+        let newWidth = img.width * scaleFactor;
+        let newHeight = img.height * scaleFactor;
+
+        // get the top left position of the image
+        // in order to center the image within the canvas
+        let x = editorCanvas.width / 2 - newWidth / 2;
+        let y = editorCanvas.height / 2 - newHeight / 2;
+
+        setOptions({ x, y, scale: scaleFactor });
+        setImage(img);
+      }
+    };
+  };
+
+  const handleFileLoad = (settings: string) => {
+    const {
+      canvas: { photo },
+    } = JSON.parse(settings);
+
+    const img = new Image();
+    img.src = photo.src;
+    img.onload = () => {
+      if (canvasRef.current) {
+        let scaleFactor = Math.max(photo.width / img.width, photo.height / img.height);
+
+        setOptions({
+          x: photo.x,
+          y: photo.y,
+          scale: scaleFactor,
+        });
+        setImage(img);
+      }
+    };
   };
 
   const handleExportClick = () => {
@@ -118,7 +119,7 @@ export const PhotoEditor = () => {
         <input
           type="file"
           id="fileSelector"
-          onChange={handlePhotoUpload}
+          onChange={handleFileChange}
           onClick={(e: React.MouseEvent<HTMLElement>) => ((e.target as HTMLInputElement).value = '')}
         />
       </div>
