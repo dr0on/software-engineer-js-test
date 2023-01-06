@@ -2,6 +2,13 @@ import React from 'react';
 import useCanvas, { ImageAction } from '../../hooks/useCanvas';
 import { toDataURL, saveSettingsFile } from '../../utils';
 
+type SettingsType = {
+  encodedImg: string;
+  width: number;
+  height: number;
+  options: any;
+};
+
 export const PhotoEditor = () => {
   const { canvasRef, image, setImage, options, setOptions, setImageAction } = useCanvas();
 
@@ -82,32 +89,20 @@ export const PhotoEditor = () => {
     saveSettingsFile(JSON.stringify(settings));
   };
 
-  const getImageSettings = ({
-    encodedImg = '',
-    width,
-    height,
-    options,
-  }: {
-    encodedImg: string;
-    width: number;
-    height: number;
-    options: any;
-  }) => {
-    return {
-      canvas: {
-        width: canvasRef.current?.width,
-        height: canvasRef.current?.height,
-        photo: {
-          id: 'image-configuration.json',
-          src: encodedImg,
-          width: width * options.scale,
-          height: height * options.scale,
-          x: options.x,
-          y: options.y,
-        },
+  const getImageSettings = ({ encodedImg = '', width, height, options }: SettingsType) => ({
+    canvas: {
+      width: canvasRef.current?.width,
+      height: canvasRef.current?.height,
+      photo: {
+        id: 'image-configuration.json',
+        src: encodedImg,
+        width: width * options.scale,
+        height: height * options.scale,
+        x: options.x,
+        y: options.y,
       },
-    };
-  };
+    },
+  });
 
   return (
     <>
