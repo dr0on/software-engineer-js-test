@@ -117,6 +117,7 @@ export const PhotoEditor = () => {
         <input
           type="file"
           id="fileSelector"
+          data-testid="file-selector"
           onChange={handleFileChange}
           onClick={(e: React.MouseEvent<HTMLElement>) => ((e.target as HTMLInputElement).value = '')}
         />

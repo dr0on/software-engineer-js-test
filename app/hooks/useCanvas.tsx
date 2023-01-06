@@ -35,9 +35,9 @@ const useCanvas = () => {
     }
   }, [image, options.x, options.y, options.scale]);
 
-  const calculateZoomOptions = (img: any, scale: number) => {
-    const currentWidth = img.width * options.scale;
-    const currentHeight = img.height * options.scale;
+  const calculateZoomOptions = (scale: number) => {
+    const currentWidth = image.width * options.scale;
+    const currentHeight = image.height * options.scale;
 
     const newWidth = currentWidth * scale;
     const newHeight = currentHeight * scale;
@@ -67,13 +67,13 @@ const useCanvas = () => {
   const isRightLimit = () => options.x + MOVE_STEP > 0;
 
   const setZoomIn = () => {
-    const { x, y, scale } = calculateZoomOptions(image, 1.1);
+    const { x, y, scale } = calculateZoomOptions(1.1);
     setOptions({ x, y, scale });
   };
 
   const setZoomOut = () => {
     if (!isTopLimit() && !isBottomLimit() && !isLeftLimit() && !isRightLimit()) {
-      const { x, y, scale } = calculateZoomOptions(image, 0.9);
+      const { x, y, scale } = calculateZoomOptions(0.9);
       setOptions({ x, y, scale });
     }
   };
